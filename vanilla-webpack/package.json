@@ -1,0 +1,23 @@
+{
+    "scripts": {
+        "build": "webpack"
+    },
+    "devDependencies": {
+        "@babel/core": "latest",
+        "@babel/preset-env": "latest",
+        "@babel/preset-react": "latest",
+        "babel-loader": "latest",
+        "css-loader": "latest",
+        "html-webpack-plugin": "latest",
+        "style-loader": "latest",
+        "webpack": "latest",
+        "webpack-cli": "latest"
+    },
+    "dependencies": {
+        "@azure/app-configuration-provider": "file:./js-provider.tgz",
+        "@microsoft/feature-management": "latest",
+        "@microsoft/feature-management-applicationinsights-browser": "latest",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    }
+}

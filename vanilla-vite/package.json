@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "latest",
+        "vite": "latest"
+    },
+    "dependencies": {
+        "@azure/app-configuration-provider": "latest",
+        "@microsoft/feature-management": "latest",
+        "@microsoft/feature-management-applicationinsights-browser": "latest",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    }
+}
