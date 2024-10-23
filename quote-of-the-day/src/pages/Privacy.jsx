@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Privacy = () => {
-    return <h1>Privacy</h1>;
+    return <h3>Use this page to detail your site's privacy policy.</h3>;
   };
   
 export default Privacy;

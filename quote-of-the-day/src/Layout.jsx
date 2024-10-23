@@ -1,7 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from './pages/AppContext';
 
 const Layout = ({ children }) => {
+  const { currentUser, logoutUser } = useContext(AppContext);
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/');
+  };
+
   return (
     <div className="quote-page">
       <header className="navbar">
@@ -13,8 +23,17 @@ const Layout = ({ children }) => {
           </nav>
         </div>
         <div className="navbar-right">
-          <Link to="/register">Register</Link>
-          <Link to="/login">Login</Link>
+          {currentUser ? (
+            <>
+              <span>Hello, {currentUser}!</span>
+              <button onClick={handleLogout} className="logout-btn">Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/register">Register</Link>
+              <Link to="/login">Login</Link>
+            </>
+          )}
         </div>
       </header>
 
