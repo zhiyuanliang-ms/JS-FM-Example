@@ -4,7 +4,7 @@ const appInsights = new ApplicationInsights({ config: {
 }});
 appInsights.loadAppInsights();
 
-
+import React from 'react';
 import { load } from "@azure/app-configuration-provider";
 import { FeatureManager, ConfigurationMapFeatureFlagProvider, ConfigurationObjectFeatureFlagProvider } from "@microsoft/feature-management";
 import { createTelemetryPublisher } from "@microsoft/feature-management-applicationinsights-browser";

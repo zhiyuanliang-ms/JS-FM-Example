@@ -5,20 +5,19 @@ const appInsights = new ApplicationInsights({ config: {
 appInsights.loadAppInsights();
 
 import React from 'react';
-
+import { useState, useEffect } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { load } from "@azure/app-configuration-provider";
 import { FeatureManager, ConfigurationMapFeatureFlagProvider, ConfigurationObjectFeatureFlagProvider } from "@microsoft/feature-management";
 import { createTelemetryPublisher } from "@microsoft/feature-management-applicationinsights-browser";
-import { useEffect, useState } from 'react';
 
-function App() {
+function Home() {
+  const [liked, setLiked] = useState(false);
 
-  const [isBetaEnabled, setIsBetaEnabled] = useState(null);
-
+  const [variant, setVariant] = useState(undefined);
   const fetchData = async () => {
     const appConfig = await load(
-      "Endpoint=https://zhiyuanliang-test.azconfig-test.io;Id=c0EH;Secret=45T6yvK386A2UfVUFjNDGHDgTGzpsbWOWlt5Pvj5s9orLAS9jsGLJQQJ99AJADLArgHeHiRoAAACAZACTX4k",
-      // "Endpoint=https://appconfig-lzy-dev.azconfig.io;Id=1IOH;Secret=90rsYJ0WOCQENkJVAhhjXE6f0DihG9EqAJA3UUIWIoKvqCzGVjJJJQQJ99AJAC3pKaRJhn2FAAACAZAC6iVX",
+      "Endpoint=https://appconfig-lzy-dev.azconfig.io;Id=1IOH;Secret=90rsYJ0WOCQENkJVAhhjXE6f0DihG9EqAJA3UUIWIoKvqCzGVjJJJQQJ99AJAC3pKaRJhn2FAAACAZAC6iVX",
       {
         featureFlagOptions: {
           enabled: true,
@@ -29,44 +28,44 @@ function App() {
         }
       }
     );
-    console.log(appConfig.get("test"));
-    // const ffp = new ConfigurationMapFeatureFlagProvider(appConfig);
 
-    const jsonConfig = {
-      "feature_management": {
-          "feature_flags": [
-            {
-              "id": "Beta",
-              "enabled": true,
-              "telemetry": {
-                "enabled": true
-              }
-            }
-          ]
-      }
-    };
-    const ffp = new ConfigurationObjectFeatureFlagProvider(jsonConfig);
-
+    const ffp = new ConfigurationMapFeatureFlagProvider(appConfig);
     const sendTelemetry = createTelemetryPublisher(appInsights);
     const fm = new FeatureManager(
       ffp,
       {onFeatureEvaluated: sendTelemetry}
     );
   
-    setIsBetaEnabled(await fm.isEnabled("Beta"));
+    setVariant(await fm.getVariant("Greeting"));
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const handleClick = () => {
+    setLiked(!liked); // Toggle liked state
+  };
+
   return (
-    <>
-      <div>
-        <p>Beta feature flag is {isBetaEnabled === null ? 'loading...' : isBetaEnabled ? 'enabled' : 'disabled'}.</p>
+    <div className="quote-card">
+      <p>Variant is {variant === undefined ? 'loading...' : variant.name}.</p>
+      <h2>
+        Hi <b>Guest</b>, hope this makes your day!
+      </h2>
+      <blockquote>
+        <p>"You cannot change what you are, only what you do."</p>
+        <footer>— Philip Pullman</footer>
+      </blockquote>
+
+      <div className="vote-container">
+        <button className="heart-button" onClick={handleClick}>
+          {liked ? <FaHeart /> : <FaRegHeart />}
+        </button>
       </div>
-    </>
-  )
+
+    </div>
+  );
 }
-    
-export default App
+
+export default Home;

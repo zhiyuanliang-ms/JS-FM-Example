@@ -1,0 +1,32 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Layout = ({ children }) => {
+  return (
+    <div className="quote-page">
+      <header className="navbar">
+        <div className="navbar-left">
+          <Link to="/" className="logo">QuoteOfTheDay</Link>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/privacy">Privacy</Link>
+          </nav>
+        </div>
+        <div className="navbar-right">
+          <Link to="/register">Register</Link>
+          <Link to="/login">Login</Link>
+        </div>
+      </header>
+
+      <main className="quote-container">
+        {children}
+      </main>
+
+      <footer>
+        <p>&copy; 2024 - QuoteOfTheDay - <Link to="/privacy">Privacy</Link></p>
+      </footer>
+    </div>
+  );
+};
+
+export default Layout;

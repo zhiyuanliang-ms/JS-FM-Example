@@ -17,3 +17,5 @@ https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto
 crypto is only available in secure context (i.e. https & localhost)
 
 https://github.com/Azure/AppConfiguration-JavaScriptProvider/pull/104
+
+Remember to mannually disable request tracing.
