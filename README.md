@@ -9,6 +9,8 @@ npx create-remix
 
 npm create vite
 
+npx create-react-app
+
 npm i -g http-server
 
 https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto 
