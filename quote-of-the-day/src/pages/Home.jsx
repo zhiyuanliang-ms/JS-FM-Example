@@ -1,9 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-
 import { trackEvent } from '@microsoft/feature-management-applicationinsights-browser';
-
 import { AppContext } from './AppContext';
 
 function Home() {
@@ -15,19 +13,16 @@ function Home() {
     const init = async () => {  
       const variant = await featureManager?.getVariant("Greeting", { userId: currentUser });
       setVariant(variant);
-      console.log(variant?.name);
+      setLiked(false);
     };
 
     init();
   }, [featureManager, currentUser]);
 
-  useEffect(() => {
-    console.log(variant?.name);
-  }, [variant]);
-
   const handleClick = () => {
     if (!liked) {
-      trackEvent(appInsights, currentUser, { name: "Like" });
+      const targetingId = currentUser;
+      trackEvent(appInsights, targetingId, { name: "Like" });
     }
     setLiked(!liked);
   };
