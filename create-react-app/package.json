@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@azure/app-configuration-provider": "file:./js-provider-1.1.1.tgz",
+    "@azure/app-configuration-provider": "latest",
     "@microsoft/feature-management": "latest",
     "@microsoft/feature-management-applicationinsights-browser": "latest",
     "@testing-library/jest-dom": "^5.17.0",

@@ -13,14 +13,14 @@ export const ContextProvider = ({ children }) => {
   const [config, setConfig] = useState(undefined);
   const [featureManager, setFeatureManager] = useState(undefined);
   const appInsights = new ApplicationInsights({ config: {
-    connectionString: "InstrumentationKey=1ed14b85-2501-4762-a20e-1b8339da0cd5;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=a4b55d1c-c833-4ca9-869e-e4bf8d1ecd4e"
+    connectionString: "YOUR-CONNECTION-STRING"
   }});
   appInsights.loadAppInsights();
 
   useEffect(() => {
     const init = async () => {
       const appConfig = await load(
-        "Endpoint=https://appconfig-lzy-dev.azconfig.io;Id=1IOH;Secret=90rsYJ0WOCQENkJVAhhjXE6f0DihG9EqAJA3UUIWIoKvqCzGVjJJJQQJ99AJAC3pKaRJhn2FAAACAZAC6iVX",
+        "YOUR-CONNECTION-STRING",
         {
           featureFlagOptions: {
             enabled: true,
