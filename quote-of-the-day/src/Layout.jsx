@@ -1,11 +1,21 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from './pages/AppContext';
 
 const Layout = ({ children }) => {
-  const { currentUser, logoutUser } = useContext(AppContext);
+  const { featureManager, currentUser, logoutUser } = useContext(AppContext);
+  const [beta, setBeta] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const init = async () => {  
+      const enabled = await featureManager?.isEnabled("Beta");
+      setBeta(enabled);
+    };
+
+    init();
+  }, [featureManager]);
   
   const handleLogout = () => {
     logoutUser();
@@ -20,20 +30,29 @@ const Layout = ({ children }) => {
           <nav>
             <Link to="/">Home</Link>
             <Link to="/privacy">Privacy</Link>
+            { beta ? 
+              ( 
+                <Link to="/beta">Beta</Link>
+              ) :  
+              null 
+            }
           </nav>
         </div>
         <div className="navbar-right">
-          {currentUser ? (
-            <>
-              <span>Hello, {currentUser}!</span>
-              <button onClick={handleLogout} className="logout-btn">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/register">Register</Link>
-              <Link to="/login">Login</Link>
-            </>
-          )}
+          {currentUser ? 
+            (
+              <>
+                <span>Hello, {currentUser}!</span>
+                <button onClick={handleLogout} className="logout-btn">Logout</button>
+              </>
+            ) : 
+            (
+              <>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+              </>
+            )
+          }
         </div>
       </header>
 

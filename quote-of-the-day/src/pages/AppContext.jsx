@@ -31,6 +31,9 @@ export const ContextProvider = ({ children }) => {
               enabled: true,
               refreshIntervalInMs: 10_000
             }
+          },
+          requestTracingOptions: {
+            enabled: false
           }
         }
       );
