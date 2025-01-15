@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@azure/app-configuration-provider": "latest",
+    "@azure/app-configuration-provider": "preview",
     "@microsoft/feature-management": "latest",
     "@microsoft/feature-management-applicationinsights-browser": "latest",
     "react": "^18",

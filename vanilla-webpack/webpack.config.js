@@ -26,7 +26,8 @@ module.exports = {
   resolve: {
     extensions: ['.jsx', '.js'],
     fallback: {
-      "crypto": false,  // require.resolve("crypto-browserify")
+      "crypto": false,  // require.resolve("crypto-browserify"),
+      "dns/promises": false
     },
   },
   plugins: [
